@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geo Adventure - 消えた航海図</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ステータスバー -->
+  <div class="status-bar hidden" id="status-bar">
+    <div class="status-item">
+      <span class="status-label">HP</span>
+      <div class="hp-bar-bg">
+        <div class="hp-bar-fill" id="hp-bar-fill" style="width:100%"></div>
+      </div>
+      <span id="hp-text">100</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Round</span>
+      <span id="round-text">1 / 7</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Score</span>
+      <span id="score-text">0</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">航海図</span>
+      <span id="fragment-text">0 / 7</span>
+    </div>
+  </div>
+
+  <!-- パスポート表示ボタン -->
+  <button class="btn-passport-float hidden" id="btn-passport-view" title="パスポートを見る">📕</button>
+
+  <!-- ======== イントロ画面 ======== -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-container">
+      <h1 class="game-title">Geo Adventure</h1>
+      <p class="game-subtitle">消えた航海図 ～ The Phantom Chart ～</p>
+
+      <div class="intro-story">
+        伝説の探検家が遺した<span class="story-highlight">『幻の航海図（ファントム・チャート）』</span>。<br><br>
+        その断片が世界中に散らばっている。<br>
+        君はヒントを頼りに現地へ飛び、すべてのピースを集めて地図を完成させなければならない。<br><br>
+        限られた<span class="story-highlight">行動力（HP）</span>を賢く使い、
+        <span class="story-highlight">推理</span>と<span class="story-highlight">決断</span>で航海図を取り戻せ！
+      </div>
+
+      <div class="intro-rules">
+        <h3>冒険のルール</h3>
+        <ul>
+          <li>各地で3段階のヒントを入手できるが、それぞれHPを消費する</li>
+          <li>風景写真（コスト小）→ 特産品データ（コスト中）→ 現地の人に聞く（コスト大）</li>
+          <li>少ないヒントで正解するほど高得点＆パーフェクトボーナス</li>
+          <li>正解するとHP回復＋航海図の断片＋パスポートスタンプ獲得</li>
+          <li>不正解はHPダメージ。HPが0になると冒険終了！</li>
+          <li>各ラウンド後、次の目的地の地域を選択できる</li>
+        </ul>
+      </div>
+
+      <button class="btn-primary" id="btn-start">冒険に出発する</button>
+    </div>
+  </div>
+
+  <!-- ======== ラウンド画面 ======== -->
+  <div class="screen" id="screen-round">
+    <div class="round-header">
+      <h2 id="round-info">第1の目的地</h2>
+      <p>ヒントを手がかりに、この都市を特定せよ</p>
+    </div>
+    <div class="hints-area" id="hints-area"></div>
+    <div class="choices-area" id="choices-area"></div>
+  </div>
+
+  <!-- ======== 結果画面 ======== -->
+  <div class="screen" id="screen-result">
+    <div id="result-content"></div>
+  </div>
+
+  <!-- ======== ルート選択画面 ======== -->
+  <div class="screen" id="screen-route">
+    <div class="route-container">
+      <h2>次の航路を選べ</h2>
+      <p class="route-flavor" id="route-flavor">どの地域へ向かう？</p>
+      <div class="route-options" id="route-options"></div>
+    </div>
+  </div>
+
+  <!-- ======== パスポート画面 ======== -->
+  <div class="screen" id="screen-passport">
+    <div class="passport-screen">
+      <div class="passport-header">
+        <h2>冒険者のパスポート</h2>
+        <button class="btn-back" id="btn-passport-back">戻る</button>
+      </div>
+      <div id="passport-content"></div>
+    </div>
+  </div>
+
+  <!-- ======== エンディング画面 ======== -->
+  <div class="screen" id="screen-ending">
+    <div class="ending-container" id="ending-content"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/passport.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
