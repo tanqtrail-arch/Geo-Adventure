@@ -15,29 +15,39 @@
   <div class="status-bar hidden" id="status-bar">
     <div class="status-item">
       <span class="status-label">HP</span>
-      <div class="hp-bar-bg">
-        <div class="hp-bar-fill" id="hp-bar-fill" style="width:100%"></div>
-      </div>
+      <div class="hp-bar-bg"><div class="hp-bar-fill" id="hp-bar-fill" style="width:100%"></div></div>
       <span id="hp-text">100</span>
     </div>
     <div class="status-item">
-      <span class="status-label">Round</span>
-      <span id="round-text">1 / 7</span>
+      <span class="status-label">R</span>
+      <span id="round-text">1/7</span>
     </div>
     <div class="status-item">
-      <span class="status-label">Score</span>
+      <span class="status-label">Pt</span>
       <span id="score-text">0</span>
     </div>
     <div class="status-item">
-      <span class="status-label">航海図</span>
-      <span id="fragment-text">0 / 7</span>
+      <span class="status-label">🗺️</span>
+      <span id="fragment-text">0/7</span>
     </div>
+    <div class="status-item" id="combo-display">
+      <span id="combo-text" class="combo-text"></span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">🛡️</span>
+      <span id="shield-text"></span>
+    </div>
+    <div class="timer-display hidden" id="timer-display">60s</div>
   </div>
 
-  <!-- パスポート表示ボタン -->
-  <button class="btn-passport-float hidden" id="btn-passport-view" title="パスポートを見る">📕</button>
+  <!-- フロートボタン群 -->
+  <button class="btn-passport-float hidden" id="btn-passport-view" title="パスポート">📕</button>
+  <button class="btn-mute" id="btn-mute" title="音声切替">🔊</button>
 
-  <!-- ======== イントロ画面 ======== -->
+  <!-- 世界地図 -->
+  <div class="map-wrapper hidden" id="map-container"></div>
+
+  <!-- ======== イントロ ======== -->
   <div class="screen active" id="screen-intro">
     <div class="intro-container">
       <h1 class="game-title">Geo Adventure</h1>
@@ -51,38 +61,67 @@
         <span class="story-highlight">推理</span>と<span class="story-highlight">決断</span>で航海図を取り戻せ！
       </div>
 
+      <div class="intro-section">
+        <h3>難易度を選択</h3>
+        <div class="diff-selector">
+          <button class="diff-btn" data-diff="easy">🟢 イージー<span>HP150 / コスト低</span></button>
+          <button class="diff-btn selected" data-diff="normal">🟡 ノーマル<span>HP100 / 標準</span></button>
+          <button class="diff-btn" data-diff="hard">🔴 ハード<span>HP70 / コスト高</span></button>
+        </div>
+      </div>
+
+      <div class="intro-section">
+        <label class="toggle-label">
+          <input type="checkbox" id="timer-toggle">
+          <span class="toggle-text">⏱️ タイマーモード（各ラウンド60秒制限）</span>
+        </label>
+      </div>
+
       <div class="intro-rules">
         <h3>冒険のルール</h3>
         <ul>
           <li>各地で3段階のヒントを入手できるが、それぞれHPを消費する</li>
-          <li>風景写真（コスト小）→ 特産品データ（コスト中）→ 現地の人に聞く（コスト大）</li>
           <li>少ないヒントで正解するほど高得点＆パーフェクトボーナス</li>
-          <li>正解するとHP回復＋航海図の断片＋パスポートスタンプ獲得</li>
-          <li>不正解はHPダメージ。HPが0になると冒険終了！</li>
-          <li>各ラウンド後、次の目的地の地域を選択できる</li>
+          <li>連続正解でコンボ倍率UP（最大3.5倍）</li>
+          <li>50:50ライフラインで選択肢を2つに絞れる（1ゲーム2回）</li>
+          <li>スコアを使ってショップでアイテム購入可能</li>
+          <li>秘宝を合成してボーナススコアを獲得</li>
         </ul>
       </div>
 
-      <button class="btn-primary" id="btn-start">冒険に出発する</button>
+      <div class="intro-buttons">
+        <button class="btn-primary" id="btn-start">冒険に出発する</button>
+        <button class="btn-daily" id="btn-daily">📅 デイリーチャレンジ</button>
+      </div>
+
+      <div class="intro-menu">
+        <button class="btn-menu" id="btn-menu-encyclopedia">📖 図鑑</button>
+        <button class="btn-menu" id="btn-menu-achievements">🏅 実績</button>
+      </div>
+
+      <div id="intro-stats" class="intro-stats"></div>
     </div>
   </div>
 
-  <!-- ======== ラウンド画面 ======== -->
+  <!-- ======== ラウンド ======== -->
   <div class="screen" id="screen-round">
+    <div id="narrator" class="narrator hidden"></div>
     <div class="round-header">
       <h2 id="round-info">第1の目的地</h2>
       <p>ヒントを手がかりに、この都市を特定せよ</p>
+      <p id="region-hint" class="region-hint hidden"></p>
     </div>
+    <div id="lifeline-area" class="lifeline-area"></div>
     <div class="hints-area" id="hints-area"></div>
     <div class="choices-area" id="choices-area"></div>
   </div>
 
-  <!-- ======== 結果画面 ======== -->
+  <!-- ======== 結果 ======== -->
   <div class="screen" id="screen-result">
     <div id="result-content"></div>
   </div>
 
-  <!-- ======== ルート選択画面 ======== -->
+  <!-- ======== ルート選択 ======== -->
   <div class="screen" id="screen-route">
     <div class="route-container">
       <h2>次の航路を選べ</h2>
@@ -91,7 +130,7 @@
     </div>
   </div>
 
-  <!-- ======== パスポート画面 ======== -->
+  <!-- ======== パスポート ======== -->
   <div class="screen" id="screen-passport">
     <div class="passport-screen">
       <div class="passport-header">
@@ -102,14 +141,37 @@
     </div>
   </div>
 
-  <!-- ======== エンディング画面 ======== -->
+  <!-- ======== ショップ ======== -->
+  <div class="screen" id="screen-shop">
+    <div id="shop-content"></div>
+  </div>
+
+  <!-- ======== 合成 ======== -->
+  <div class="screen" id="screen-synthesis">
+    <div id="synthesis-content"></div>
+  </div>
+
+  <!-- ======== 図鑑 ======== -->
+  <div class="screen" id="screen-encyclopedia">
+    <div id="encyclopedia-content"></div>
+  </div>
+
+  <!-- ======== 実績 ======== -->
+  <div class="screen" id="screen-achievements">
+    <div id="achievements-content"></div>
+  </div>
+
+  <!-- ======== エンディング ======== -->
   <div class="screen" id="screen-ending">
     <div class="ending-container" id="ending-content"></div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Scripts (順序重要) -->
   <script src="js/data.js"></script>
   <script src="js/game.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/passport.js"></script>
   <script src="js/ui.js"></script>
 </body>
