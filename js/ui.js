@@ -228,9 +228,9 @@ class GameUI {
 
     this.updateStatusBar();
 
-    // 世界地図更新（現在の都市は正答前なので表示しない）
-    const visitedCities = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
-    this.map.render(visitedCities, CITIES);
+    // 世界地図更新（正解した都市のみ点灯、全都市は灰色で表示）
+    const correctCities = this.game.passport.map(p => CITIES.find(c => c.name === p.city)).filter(Boolean);
+    this.map.render(correctCities, CITIES);
     document.getElementById("map-container").classList.remove("hidden");
   }
 
@@ -332,10 +332,10 @@ class GameUI {
         </div>`;
     }
 
-    // 正答時は地図を更新して正解都市を表示
+    // 正答時は地図を更新して正解都市を点灯表示
     if (result.isCorrect) {
-      const visitedCities = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
-      this.map.render(visitedCities, CITIES);
+      const correctCities = this.game.passport.map(p => CITIES.find(c => c.name === p.city)).filter(Boolean);
+      this.map.render(correctCities, CITIES);
     }
 
     // ボタンエリア
@@ -381,14 +381,14 @@ class GameUI {
     const options = this.game.getRouteOptions();
     const container = document.getElementById("route-options");
     container.innerHTML = "";
-    document.getElementById("route-flavor").textContent = `第${this.game.currentRound + 1}の冒険先を選べ。どの地域へ向かう？`;
+    document.getElementById("route-flavor").textContent = `第${this.game.currentRound + 1}の冒険先を選べ。どの大陸へ向かう？`;
 
     options.forEach(opt => {
       const btn = document.createElement("button");
       btn.className = "route-btn";
       btn.innerHTML = `<span class="route-icon">${opt.label}</span><span class="route-desc">${opt.description}</span>`;
       btn.addEventListener("click", () => {
-        this.game.selectRoute(opt.region);
+        this.game.selectRoute(opt.continent);
         this.updateStatusBar();
         this.showRound();
       });
@@ -428,9 +428,9 @@ class GameUI {
         btn.classList.add("active");
         document.getElementById(`tab-${btn.dataset.tab}`).classList.remove("hidden");
         if (btn.dataset.tab === "map") {
-          const visited = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
+          const correct = this.game.passport.map(p => CITIES.find(c => c.name === p.city)).filter(Boolean);
           const pMap = new WorldMap("passport-map-container");
-          pMap.render(visited, CITIES);
+          pMap.render(correct, CITIES);
         }
       });
     });
@@ -525,7 +525,7 @@ class GameUI {
       achHTML += '</div>';
     }
 
-    const visitedCities = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
+    const correctCities = this.game.passport.map(p => CITIES.find(c => c.name === p.city)).filter(Boolean);
 
     document.getElementById("ending-content").innerHTML = `
       <div class="ending-badge">${this.getEndingBadge(ending.title)}</div>
@@ -548,9 +548,9 @@ class GameUI {
         <button class="btn-secondary" id="btn-share">結果をコピー</button>
       </div>`;
 
-    // 世界地図
+    // 世界地図（正解都市のみ点灯）
     const endMap = new WorldMap("ending-map-container");
-    endMap.render(visitedCities, CITIES);
+    endMap.render(correctCities, CITIES);
 
     document.getElementById("btn-retry").addEventListener("click", () => {
       document.getElementById("status-bar").classList.add("hidden");

@@ -48,6 +48,7 @@ class GeoGame {
     this.noHintCorrect = 0;
     this.fastAnswers = 0;
     this.visitedRegions = new Set();
+    this.visitedContinents = new Set();
     this.synthesized = [];
     this.isDailyChallenge = false;
 
@@ -93,13 +94,13 @@ class GeoGame {
     this.availableCities = arr;
   }
 
-  pickNextCity(preferredRegion) {
+  pickNextCity(preferredContinent) {
     const unvisited = this.availableCities.filter(c => !this.visited.includes(c.id));
     if (unvisited.length === 0) { this.endGame(); return null; }
 
     let candidates = unvisited;
-    if (preferredRegion) {
-      const filtered = unvisited.filter(c => c.region === preferredRegion);
+    if (preferredContinent) {
+      const filtered = unvisited.filter(c => c.continent === preferredContinent);
       if (filtered.length > 0) candidates = filtered;
     }
 
@@ -109,6 +110,7 @@ class GeoGame {
     this.lifeline5050UsedThisRound = false;
     this.currentRound++;
     this.visitedRegions.add(this.currentCity.region);
+    this.visitedContinents.add(this.currentCity.continent);
 
     if (this.timerEnabled) {
       this.timerRemaining = GAME_CONFIG.timerDuration;
@@ -324,16 +326,16 @@ class GeoGame {
     }));
   }
 
-  // ルート選択
+  // ルート選択（大陸ベース）
   getRouteOptions() {
     const unvisited = this.availableCities.filter(c => !this.visited.includes(c.id));
-    const regions = [...new Set(unvisited.map(c => c.region))];
-    return regions.map(r => ({ region: r, ...ROUTE_CHOICES[r] }));
+    const continents = [...new Set(unvisited.map(c => c.continent))];
+    return continents.map(c => ({ continent: c, ...ROUTE_CHOICES[c] }));
   }
 
-  selectRoute(region) {
-    this.routeHistory.push(region);
-    return this.pickNextCity(region);
+  selectRoute(continent) {
+    this.routeHistory.push(continent);
+    return this.pickNextCity(continent);
   }
 
   // 地域ヒント

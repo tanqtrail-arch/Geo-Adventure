@@ -6,7 +6,7 @@
 const CITIES = [
   // ===== 既存10都市 =====
   {
-    id: "cairo", name: "カイロ", country: "エジプト", region: "hot",
+    id: "cairo", name: "カイロ", country: "エジプト", region: "hot", continent: "africa",
     regionLabel: "灼熱の砂漠地帯", lat: 30.04, lng: 31.24,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "砂漠の中に巨大な三角形の建造物が並んでいる。その傍らにはスフィンクスが静かに座っている。" },
@@ -19,7 +19,7 @@ const CITIES = [
     encyclopedia: { population: "約2,100万人", area: "3,085 km²", trivia: "ギザのピラミッドは古代七不思議で唯一現存する建造物。カイロの意味は「勝利者」。" }
   },
   {
-    id: "tokyo", name: "東京", country: "日本", region: "temperate",
+    id: "tokyo", name: "東京", country: "日本", region: "temperate", continent: "asia",
     regionLabel: "桜舞う島国", lat: 35.68, lng: 139.69,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "超高層ビル群の中に、赤と白の巨大な電波塔がそびえ立つ。交差点を何千人もの人が一斉に渡っている。" },
@@ -32,7 +32,7 @@ const CITIES = [
     encyclopedia: { population: "約1,400万人", area: "2,194 km²", trivia: "世界最大の都市圏人口（約3,700万人）。山手線は1日約350万人を運ぶ。" }
   },
   {
-    id: "paris", name: "パリ", country: "フランス", region: "cold",
+    id: "paris", name: "パリ", country: "フランス", region: "cold", continent: "europe",
     regionLabel: "霧のヨーロッパ", lat: 48.86, lng: 2.35,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "鉄骨で組まれた巨大な塔が街の中心にそびえる。セーヌ川沿いにはカフェが連なり、石造りの美術館が見える。" },
@@ -45,7 +45,7 @@ const CITIES = [
     encyclopedia: { population: "約215万人", area: "105 km²", trivia: "ルーヴル美術館の総面積は約73,000m²。年間来場者数は世界一の美術館。" }
   },
   {
-    id: "newyork", name: "ニューヨーク", country: "アメリカ", region: "temperate",
+    id: "newyork", name: "ニューヨーク", country: "アメリカ", region: "temperate", continent: "northAmerica",
     regionLabel: "自由の大陸", lat: 40.71, lng: -74.01,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "摩天楼が立ち並ぶ島。港には緑色の巨大な女性像が右手にたいまつを掲げて立っている。" },
@@ -58,7 +58,7 @@ const CITIES = [
     encyclopedia: { population: "約840万人", area: "783 km²", trivia: "マンハッタン島はオランダ人が先住民から約24ドル相当で購入したと伝えられる。" }
   },
   {
-    id: "rio", name: "リオデジャネイロ", country: "ブラジル", region: "hot",
+    id: "rio", name: "リオデジャネイロ", country: "ブラジル", region: "hot", continent: "southAmerica",
     regionLabel: "情熱の南米", lat: -22.91, lng: -43.17,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "山の頂上に両手を広げた巨大な像が立っている。眼下には白砂のビーチと青い海が広がる。" },
@@ -71,7 +71,7 @@ const CITIES = [
     encyclopedia: { population: "約680万人", area: "1,221 km²", trivia: "コルコバードのキリスト像は高さ30m、両腕の幅28m。新・世界七不思議の一つ。" }
   },
   {
-    id: "sydney", name: "シドニー", country: "オーストラリア", region: "hot",
+    id: "sydney", name: "シドニー", country: "オーストラリア", region: "hot", continent: "oceania",
     regionLabel: "南海の大陸", lat: -33.87, lng: 151.21,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "港に面して白い貝殻のような形の巨大な建築物がある。その隣には大きなアーチ橋が架かっている。" },
@@ -84,7 +84,7 @@ const CITIES = [
     encyclopedia: { population: "約530万人", area: "12,368 km²", trivia: "オペラハウスの屋根は100万枚以上のタイルで覆われている。建設に16年かかった。" }
   },
   {
-    id: "moscow", name: "モスクワ", country: "ロシア", region: "cold",
+    id: "moscow", name: "モスクワ", country: "ロシア", region: "cold", continent: "europe",
     regionLabel: "極寒の大地", lat: 55.76, lng: 37.62,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "赤い壁に囲まれた広場。色とりどりの玉ねぎ型ドームを持つ聖堂がそびえ立つ。雪が降り積もっている。" },
@@ -97,7 +97,7 @@ const CITIES = [
     encyclopedia: { population: "約1,280万人", area: "2,511 km²", trivia: "モスクワの地下鉄はシャンデリアや壁画で装飾され「地下の宮殿」と呼ばれる。" }
   },
   {
-    id: "mumbai", name: "ムンバイ", country: "インド", region: "hot",
+    id: "mumbai", name: "ムンバイ", country: "インド", region: "hot", continent: "asia",
     regionLabel: "スパイスの楽園", lat: 19.08, lng: 72.88,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "海に面した巨大な石造りの門。その向こうには混沌とした街並みが広がり、色鮮やかなサリーを纏った人々が行き交う。" },
@@ -110,7 +110,7 @@ const CITIES = [
     encyclopedia: { population: "約1,250万人", area: "603 km²", trivia: "ダッバーワーラーは毎日20万個の弁当を届ける。誤配率は600万分の1と言われる。" }
   },
   {
-    id: "nairobi", name: "ナイロビ", country: "ケニア", region: "hot",
+    id: "nairobi", name: "ナイロビ", country: "ケニア", region: "hot", continent: "africa",
     regionLabel: "野生の大地", lat: -1.29, lng: 36.82,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "高層ビルの背後にサバンナが広がり、遠くに雪を頂いた山が見える。国立公園の中を野生動物が歩いている。" },
@@ -123,7 +123,7 @@ const CITIES = [
     encyclopedia: { population: "約480万人", area: "696 km²", trivia: "ナイロビは赤道直下だが標高1,660mのため年間平均気温は約17℃と涼しい。" }
   },
   {
-    id: "reykjavik", name: "レイキャビク", country: "アイスランド", region: "cold",
+    id: "reykjavik", name: "レイキャビク", country: "アイスランド", region: "cold", continent: "europe",
     regionLabel: "氷と火の島", lat: 64.15, lng: -21.94,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "カラフルな屋根の小さな街。背後には氷河と火山が共存し、空にはオーロラが揺らめいている。温泉から湯気が立ち昇る。" },
@@ -137,7 +137,7 @@ const CITIES = [
   },
   // ===== 新規20都市 =====
   {
-    id: "istanbul", name: "イスタンブール", country: "トルコ", region: "temperate",
+    id: "istanbul", name: "イスタンブール", country: "トルコ", region: "temperate", continent: "europe",
     regionLabel: "東西の架け橋", lat: 41.01, lng: 28.98,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "巨大なドーム状の建物と尖塔が海峡を見下ろす。アジアとヨーロッパを結ぶ橋が見える。" },
@@ -150,7 +150,7 @@ const CITIES = [
     encyclopedia: { population: "約1,600万人", area: "5,343 km²", trivia: "世界で唯一、二つの大陸にまたがる都市。コンスタンティノープルとも呼ばれた。" }
   },
   {
-    id: "bangkok", name: "バンコク", country: "タイ", region: "hot",
+    id: "bangkok", name: "バンコク", country: "タイ", region: "hot", continent: "asia",
     regionLabel: "微笑みの国", lat: 13.76, lng: 100.50,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "金色に輝く尖塔を持つ寺院が点在する。運河沿いに水上マーケットが賑わい、トゥクトゥクが走り回る。" },
@@ -163,7 +163,7 @@ const CITIES = [
     encyclopedia: { population: "約1,050万人", area: "1,569 km²", trivia: "正式名称は世界一長い都市名で169文字ある。略称でバンコクと呼ばれる。" }
   },
   {
-    id: "rome", name: "ローマ", country: "イタリア", region: "temperate",
+    id: "rome", name: "ローマ", country: "イタリア", region: "temperate", continent: "europe",
     regionLabel: "永遠の都", lat: 41.90, lng: 12.50,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "巨大な円形闘技場の遺跡が街の中心にある。噴水の前でコインを投げる観光客。ドーム型の大聖堂が見える。" },
@@ -176,7 +176,7 @@ const CITIES = [
     encyclopedia: { population: "約290万人", area: "1,285 km²", trivia: "コロッセオの建設には10万人の奴隷が8年かけて携わった。中に世界最小の国バチカンがある。" }
   },
   {
-    id: "london", name: "ロンドン", country: "イギリス", region: "cold",
+    id: "london", name: "ロンドン", country: "イギリス", region: "cold", continent: "europe",
     regionLabel: "霧の都", lat: 51.51, lng: -0.13,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "テムズ川沿いに巨大な時計塔がそびえる。赤い二階建てバスと黒いタクシーが行き交う。巨大な観覧車も見える。" },
@@ -189,7 +189,7 @@ const CITIES = [
     encyclopedia: { population: "約900万人", area: "1,572 km²", trivia: "大英博物館の所蔵品は約800万点。すべて見るには1日8時間で約3ヶ月かかる。" }
   },
   {
-    id: "beijing", name: "北京", country: "中国", region: "cold",
+    id: "beijing", name: "北京", country: "中国", region: "cold", continent: "asia",
     regionLabel: "龍の帝都", lat: 39.90, lng: 116.40,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "赤い壁と黄金の屋根の巨大な宮殿群。その向こうに万里の長城が山脈に沿って延びている。" },
@@ -202,7 +202,7 @@ const CITIES = [
     encyclopedia: { population: "約2,200万人", area: "16,410 km²", trivia: "万里の長城の総延長は約21,196km。紫禁城には9,999.5の部屋があるとされる。" }
   },
   {
-    id: "dubai", name: "ドバイ", country: "UAE", region: "hot",
+    id: "dubai", name: "ドバイ", country: "UAE", region: "hot", continent: "asia",
     regionLabel: "砂漠の未来都市", lat: 25.20, lng: 55.27,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "砂漠から突き出た超高層ビルが雲を突く。人工島がヤシの木の形をしている。黄金のスークが輝く。" },
@@ -215,7 +215,7 @@ const CITIES = [
     encyclopedia: { population: "約350万人", area: "4,114 km²", trivia: "50年前は小さな漁村だった。ブルジュ・ハリファの展望台からは100km先まで見える。" }
   },
   {
-    id: "seoul", name: "ソウル", country: "韓国", region: "temperate",
+    id: "seoul", name: "ソウル", country: "韓国", region: "temperate", continent: "asia",
     regionLabel: "韓流の中心", lat: 37.57, lng: 126.98,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "近代的な高層ビルの間に伝統的な宮殿がある。漢江がゆったりと流れ、山々が街を囲んでいる。" },
@@ -228,7 +228,7 @@ const CITIES = [
     encyclopedia: { population: "約970万人", area: "605 km²", trivia: "世界最速のインターネット速度を持つ都市の一つ。漢江の奇跡と呼ばれる経済発展を遂げた。" }
   },
   {
-    id: "capetown", name: "ケープタウン", country: "南アフリカ", region: "temperate",
+    id: "capetown", name: "ケープタウン", country: "南アフリカ", region: "temperate", continent: "africa",
     regionLabel: "喜望の大地", lat: -33.93, lng: 18.42,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "テーブルのように平らな山頂を持つ山がそびえる。二つの海が出会う岬が遠くに見える。" },
@@ -241,7 +241,7 @@ const CITIES = [
     encyclopedia: { population: "約440万人", area: "2,455 km²", trivia: "テーブルマウンテンは約6億年前に形成された。アフリカで最も古い都市の一つ。" }
   },
   {
-    id: "cusco", name: "クスコ", country: "ペルー", region: "cold",
+    id: "cusco", name: "クスコ", country: "ペルー", region: "cold", continent: "southAmerica",
     regionLabel: "天空の遺跡", lat: -13.53, lng: -71.97,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "標高の高い山間に石造りの精密な遺跡が広がる。段々畑が山肌を覆い、リャマが草を食んでいる。" },
@@ -254,7 +254,7 @@ const CITIES = [
     encyclopedia: { population: "約43万人", area: "385 km²", trivia: "インカ帝国の公用語ケチュア語で「へそ」を意味する。マチュピチュは1911年に再発見された。" }
   },
   {
-    id: "marrakech", name: "マラケシュ", country: "モロッコ", region: "hot",
+    id: "marrakech", name: "マラケシュ", country: "モロッコ", region: "hot", continent: "africa",
     regionLabel: "砂漠の赤い街", lat: 31.63, lng: -8.00,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "赤土色の建物が密集する旧市街。広場では蛇使いや大道芸人が人々を楽しませ、スパイスの香りが漂う。" },
@@ -267,7 +267,7 @@ const CITIES = [
     encyclopedia: { population: "約93万人", area: "230 km²", trivia: "「赤い街」の異名を持つ。旧市街（メディナ）はユネスコ世界遺産に登録されている。" }
   },
   {
-    id: "havana", name: "ハバナ", country: "キューバ", region: "hot",
+    id: "havana", name: "ハバナ", country: "キューバ", region: "hot", continent: "northAmerica",
     regionLabel: "カリブの真珠", lat: 23.11, lng: -82.37,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "パステルカラーの建物が並ぶ海辺の街。クラシックカーが走り、ラテン音楽が通りに響いている。" },
@@ -280,7 +280,7 @@ const CITIES = [
     encyclopedia: { population: "約210万人", area: "728 km²", trivia: "1950年代のアメリカ車が現役で走る。ヘミングウェイは「老人と海」をここで執筆した。" }
   },
   {
-    id: "singapore", name: "シンガポール", country: "シンガポール", region: "hot",
+    id: "singapore", name: "シンガポール", country: "シンガポール", region: "hot", continent: "asia",
     regionLabel: "獅子の都市国家", lat: 1.35, lng: 103.82,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "3つの高層ビルの上に船のような構造物が載っている。港には無数のコンテナ船。ライオンの像が水を吐いている。" },
@@ -293,7 +293,7 @@ const CITIES = [
     encyclopedia: { population: "約570万人", area: "733 km²", trivia: "チューインガムの持ち込みが禁止されている。世界一の空港（チャンギ空港）がある。" }
   },
   {
-    id: "mexicocity", name: "メキシコシティ", country: "メキシコ", region: "temperate",
+    id: "mexicocity", name: "メキシコシティ", country: "メキシコ", region: "temperate", continent: "northAmerica",
     regionLabel: "アステカの大地", lat: 19.43, lng: -99.13,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "巨大なピラミッドの遺跡が街の郊外にある。カラフルな壁画が建物を彩り、広大な広場に国旗がはためく。" },
@@ -306,7 +306,7 @@ const CITIES = [
     encyclopedia: { population: "約920万人", area: "1,485 km²", trivia: "標高2,240mに位置する世界最大の都市の一つ。アステカの首都テノチティトランの上に建設された。" }
   },
   {
-    id: "stockholm", name: "ストックホルム", country: "スウェーデン", region: "cold",
+    id: "stockholm", name: "ストックホルム", country: "スウェーデン", region: "cold", continent: "europe",
     regionLabel: "北欧の水の都", lat: 59.33, lng: 18.07,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "14の島々に広がる水の都。カラフルな旧市街の建物が水面に映る。冬には街全体が雪化粧する。" },
@@ -319,7 +319,7 @@ const CITIES = [
     encyclopedia: { population: "約98万人", area: "188 km²", trivia: "14の島と50以上の橋からなる。ヴァーサ号は1628年に処女航海で沈没し333年後に引き揚げられた。" }
   },
   {
-    id: "kathmandu", name: "カトマンズ", country: "ネパール", region: "cold",
+    id: "kathmandu", name: "カトマンズ", country: "ネパール", region: "cold", continent: "asia",
     regionLabel: "ヒマラヤの麓", lat: 27.72, lng: 85.32,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "世界最高峰の山脈を背景に、古びた寺院が密集する盆地の街。五色の祈祷旗がはためいている。" },
@@ -332,7 +332,7 @@ const CITIES = [
     encyclopedia: { population: "約100万人", area: "50 km²", trivia: "世界で唯一の長方形でない国旗を持つ国の首都。標高1,400mの盆地に位置する。" }
   },
   {
-    id: "lisbon", name: "リスボン", country: "ポルトガル", region: "temperate",
+    id: "lisbon", name: "リスボン", country: "ポルトガル", region: "temperate", continent: "europe",
     regionLabel: "大航海の起点", lat: 38.72, lng: -9.14,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "七つの丘の上に広がる街。レトロな路面電車が急坂を登り、大河の河口に巨大な橋が架かる。" },
@@ -345,7 +345,7 @@ const CITIES = [
     encyclopedia: { population: "約55万人", area: "100 km²", trivia: "ヨーロッパ大陸最西端の首都。1755年の大地震で街の85%が破壊され再建された。" }
   },
   {
-    id: "petra", name: "ペトラ", country: "ヨルダン", region: "hot",
+    id: "petra", name: "ペトラ", country: "ヨルダン", region: "hot", continent: "asia",
     regionLabel: "薔薇色の古代都市", lat: 30.33, lng: 35.44,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "赤い砂岩の断崖に精巧な神殿が彫り込まれている。狭い峡谷（シーク）を抜けると突然巨大な建造物が現れる。" },
@@ -358,7 +358,7 @@ const CITIES = [
     encyclopedia: { population: "約3万人（ワディムーサ）", area: "264 km²（遺跡公園）", trivia: "2000年以上前にナバテア人が建設。水道システムは当時の最先端技術だった。" }
   },
   {
-    id: "hanoi", name: "ハノイ", country: "ベトナム", region: "hot",
+    id: "hanoi", name: "ハノイ", country: "ベトナム", region: "hot", continent: "asia",
     regionLabel: "千年の都", lat: 21.03, lng: 105.85,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "湖の中に小さな赤い橋と祠がある。バイクの洪水が道路を埋め尽くし、フランス風の建物が点在する。" },
@@ -371,7 +371,7 @@ const CITIES = [
     encyclopedia: { population: "約800万人", area: "3,329 km²", trivia: "1000年以上の歴史を持つ。バイクの登録台数は約600万台で住民より多い。" }
   },
   {
-    id: "athens", name: "アテネ", country: "ギリシャ", region: "temperate",
+    id: "athens", name: "アテネ", country: "ギリシャ", region: "temperate", continent: "europe",
     regionLabel: "民主主義の揺籃", lat: 37.98, lng: 23.73,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "丘の上に白い大理石の柱で構成された神殿がある。青い空を背景に、古代遺跡と近代都市が共存している。" },
@@ -384,7 +384,7 @@ const CITIES = [
     encyclopedia: { population: "約66万人", area: "39 km²", trivia: "約3,400年の歴史を持つ世界最古の都市の一つ。最初のオリンピックは紀元前776年に開催された。" }
   },
   {
-    id: "buenosaires", name: "ブエノスアイレス", country: "アルゼンチン", region: "temperate",
+    id: "buenosaires", name: "ブエノスアイレス", country: "アルゼンチン", region: "temperate", continent: "southAmerica",
     regionLabel: "南米のパリ", lat: -34.60, lng: -58.38,
     hints: [
       { type: "landscape", label: "風景写真", cost: 10, text: "ヨーロッパ風の壮麗な建築が並ぶ大通り。カラフルに塗られた港町の一角。タンゴの音楽が聞こえる。" },
@@ -398,11 +398,14 @@ const CITIES = [
   }
 ];
 
-// ルート分岐の選択肢定義
+// ルート分岐の選択肢定義（大陸ベース）
 const ROUTE_CHOICES = {
-  hot: { label: "🔥 灼熱の地へ向かう", description: "暑い国・地域へ" },
-  cold: { label: "❄️ 極寒の地へ向かう", description: "寒い国・地域へ" },
-  temperate: { label: "🌸 穏やかな地へ向かう", description: "温暖な国・地域へ" }
+  asia:         { label: "🏯 アジア", description: "東洋の神秘と活気の大陸へ" },
+  europe:       { label: "🏰 ヨーロッパ", description: "歴史と文化の大陸へ" },
+  africa:       { label: "🌍 アフリカ", description: "野生と古代文明の大陸へ" },
+  northAmerica: { label: "🗽 北アメリカ", description: "自由と多様性の大陸へ" },
+  southAmerica: { label: "💃 南アメリカ", description: "情熱と自然の大陸へ" },
+  oceania:      { label: "🏝️ オセアニア", description: "南海の大自然の大陸へ" }
 };
 
 // 難易度設定
@@ -485,7 +488,7 @@ const ACHIEVEMENTS = [
   { id: "no_hint_clear",    name: "直感の天才",         icon: "🧠", description: "ヒントなしで正解した", condition: g => g.noHintCorrect >= 1 },
   { id: "perfect_game",     name: "パーフェクトゲーム", icon: "💎", description: "全問正解でクリア", condition: g => g.correctCount === g.totalRounds },
   { id: "five_streak",      name: "5連続正解",          icon: "🔥", description: "5問連続で正解した", condition: g => g.maxCombo >= 5 },
-  { id: "all_continents",   name: "全大陸制覇",         icon: "🌍", description: "全地域（暑/寒/温）を訪問した", condition: g => g.visitedRegions.size >= 3 },
+  { id: "all_continents",   name: "全大陸制覇",         icon: "🌍", description: "3つ以上の大陸を訪問した", condition: g => g.visitedContinents.size >= 3 },
   { id: "survivor",         name: "ギリギリ生還",       icon: "💀", description: "HP10以下でクリアした", condition: g => g.hp <= 10 && g.hp > 0 && !g.gameOver },
   { id: "speedster",        name: "電光石火",           icon: "⚡", description: "タイマー残り30秒以上で正解を5回", condition: g => g.fastAnswers >= 5 },
   { id: "collector_5",      name: "秘宝収集家",         icon: "🏺", description: "秘宝を5個集めた", condition: g => g.treasures.length >= 5 },
