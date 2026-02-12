@@ -228,9 +228,8 @@ class GameUI {
 
     this.updateStatusBar();
 
-    // 世界地図更新
+    // 世界地図更新（現在の都市は正答前なので表示しない）
     const visitedCities = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
-    if (this.game.currentCity) visitedCities.push(this.game.currentCity);
     this.map.render(visitedCities, CITIES);
     document.getElementById("map-container").classList.remove("hidden");
   }
@@ -331,6 +330,12 @@ class GameUI {
           ${result.bonus ? `<p class="result-bonus">${result.bonus}</p>` : ""}
           <p class="result-miss">航海図の断片を逃してしまった...</p>
         </div>`;
+    }
+
+    // 正答時は地図を更新して正解都市を表示
+    if (result.isCorrect) {
+      const visitedCities = this.game.visited.map(id => CITIES.find(c => c.id === id)).filter(Boolean);
+      this.map.render(visitedCities, CITIES);
     }
 
     // ボタンエリア
