@@ -839,6 +839,32 @@ body {
   text-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
 }
 
+/* ルート選択ボタン（地図下のフォールバック） */
+.route-btn-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.route-select-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.route-select-btn:hover {
+  border-color: var(--accent-gold);
+  background: rgba(240, 192, 64, 0.08);
+  transform: translateY(-2px);
+}
+
 /* -- Passport Screen -- */
 .passport-screen {
   padding: 20px;

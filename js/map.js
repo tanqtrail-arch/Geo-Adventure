@@ -201,19 +201,19 @@ class WorldMap {
     svg += `</defs>`;
 
     // 背景
-    svg += `<rect width="${this.width}" height="${this.height}" fill="#0a1628" rx="8"/>`;
+    svg += `<rect width="${this.width}" height="${this.height}" fill="#0a1628" rx="8" pointer-events="none"/>`;
 
     // グリッド
     for (let i = 0; i <= 8; i++) {
       const x = (i / 8) * this.width;
-      svg += `<line x1="${x}" y1="0" x2="${x}" y2="${this.height}" stroke="#111d35" stroke-width="0.3"/>`;
+      svg += `<line x1="${x}" y1="0" x2="${x}" y2="${this.height}" stroke="#111d35" stroke-width="0.3" pointer-events="none"/>`;
     }
     for (let i = 0; i <= 5; i++) {
       const y = (i / 5) * this.height;
-      svg += `<line x1="0" y1="${y}" x2="${this.width}" y2="${y}" stroke="#111d35" stroke-width="0.3"/>`;
+      svg += `<line x1="0" y1="${y}" x2="${this.width}" y2="${y}" stroke="#111d35" stroke-width="0.3" pointer-events="none"/>`;
     }
     const eqY = this.project(0, 0).y;
-    svg += `<line x1="0" y1="${eqY}" x2="${this.width}" y2="${eqY}" stroke="#1a3050" stroke-width="0.8" stroke-dasharray="4,4"/>`;
+    svg += `<line x1="0" y1="${eqY}" x2="${this.width}" y2="${eqY}" stroke="#1a3050" stroke-width="0.8" stroke-dasharray="4,4" pointer-events="none"/>`;
 
     // 大陸ポリゴン（選択可能な大陸はハイライト＋クリッカブル）
     continents.forEach(cont => {
@@ -222,7 +222,7 @@ class WorldMap {
       const stroke = isAvailable ? "#2a5580" : "#152040";
       const cls = isAvailable ? "continent-clickable" : "continent-disabled";
 
-      svg += `<g class="${cls}" data-continent="${cont.name}">`;
+      svg += `<g class="${cls}" data-continent="${cont.name}" style="pointer-events:${isAvailable ? 'all' : 'none'}; cursor:${isAvailable ? 'pointer' : 'default'}">`;
       cont.paths.forEach(d => {
         svg += `<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="0.8"/>`;
       });
