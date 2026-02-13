@@ -375,25 +375,30 @@ class GameUI {
     c.appendChild(btnArea);
   }
 
-  // ======== ルート選択 ========
+  // ======== ルート選択（世界地図インタラクティブ） ========
   showRouteSelect() {
     this.showScreen("route");
     const options = this.game.getRouteOptions();
-    const container = document.getElementById("route-options");
-    container.innerHTML = "";
-    document.getElementById("route-flavor").textContent = `第${this.game.currentRound + 1}の冒険先を選べ。どの大陸へ向かう？`;
+    const availableContinents = options.map(o => o.continent);
 
-    options.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.className = "route-btn";
-      btn.innerHTML = `<span class="route-icon">${opt.label}</span><span class="route-desc">${opt.description}</span>`;
-      btn.addEventListener("click", () => {
-        this.game.selectRoute(opt.continent);
+    document.getElementById("route-flavor").textContent = `第${this.game.currentRound + 1}の冒険先を選べ。大陸をタップして航路を決めろ！`;
+
+    // ルートオプション領域に地図を描画
+    const container = document.getElementById("route-options");
+    container.innerHTML = '<div id="route-map-container" class="route-map-container"></div>';
+
+    const correctCities = this.game.passport.map(p => CITIES.find(c => c.name === p.city)).filter(Boolean);
+    const routeMap = new WorldMap("route-map-container");
+    routeMap.renderRouteSelector(
+      availableContinents,
+      (continent) => {
+        this.game.selectRoute(continent);
         this.updateStatusBar();
         this.showRound();
-      });
-      container.appendChild(btn);
-    });
+      },
+      correctCities,
+      CITIES
+    );
   }
 
   // ======== パスポート ========

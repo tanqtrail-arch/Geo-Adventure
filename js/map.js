@@ -169,4 +169,102 @@ class WorldMap {
     svg += `</svg>`;
     container.innerHTML = svg;
   }
+
+  /**
+   * インタラクティブ大陸選択マップ
+   * @param {Array} availableContinents - 選択可能な大陸名の配列
+   * @param {Function} onSelect - 大陸選択時のコールバック (continent) => void
+   * @param {Array} correctCities - 正解済み都市（点灯表示）
+   * @param {Array} gameCities - 全都市（灰色表示）
+   */
+  renderRouteSelector(availableContinents, onSelect, correctCities, gameCities) {
+    const container = document.getElementById(this.containerId);
+    if (!container) return;
+
+    const continents = this.getContinents();
+    const availableSet = new Set(availableContinents);
+    const correctIds = new Set(correctCities.map(c => c.id));
+
+    const continentLabels = {
+      northAmerica: { label: "北アメリカ", x: 120, y: 95 },
+      southAmerica: { label: "南アメリカ", x: 150, y: 235 },
+      europe:       { label: "ヨーロッパ", x: 340, y: 55 },
+      africa:       { label: "アフリカ",   x: 345, y: 185 },
+      asia:         { label: "アジア",     x: 480, y: 75 },
+      oceania:      { label: "オセアニア", x: 570, y: 240 }
+    };
+
+    let svg = `<svg viewBox="0 0 ${this.width} ${this.height}" class="world-map-svg world-map-selector">`;
+    svg += `<defs>`;
+    svg += `<filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+    svg += `<filter id="glow-continent"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+    svg += `</defs>`;
+
+    // 背景
+    svg += `<rect width="${this.width}" height="${this.height}" fill="#0a1628" rx="8"/>`;
+
+    // グリッド
+    for (let i = 0; i <= 8; i++) {
+      const x = (i / 8) * this.width;
+      svg += `<line x1="${x}" y1="0" x2="${x}" y2="${this.height}" stroke="#111d35" stroke-width="0.3"/>`;
+    }
+    for (let i = 0; i <= 5; i++) {
+      const y = (i / 5) * this.height;
+      svg += `<line x1="0" y1="${y}" x2="${this.width}" y2="${y}" stroke="#111d35" stroke-width="0.3"/>`;
+    }
+    const eqY = this.project(0, 0).y;
+    svg += `<line x1="0" y1="${eqY}" x2="${this.width}" y2="${eqY}" stroke="#1a3050" stroke-width="0.8" stroke-dasharray="4,4"/>`;
+
+    // 大陸ポリゴン（選択可能な大陸はハイライト＋クリッカブル）
+    continents.forEach(cont => {
+      const isAvailable = availableSet.has(cont.name);
+      const fill = isAvailable ? "#1a3352" : "#0e1a2e";
+      const stroke = isAvailable ? "#2a5580" : "#152040";
+      const cls = isAvailable ? "continent-clickable" : "continent-disabled";
+
+      svg += `<g class="${cls}" data-continent="${cont.name}">`;
+      cont.paths.forEach(d => {
+        svg += `<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="0.8"/>`;
+      });
+      svg += `</g>`;
+    });
+
+    // 灰色の都市ドット
+    gameCities.forEach(city => {
+      const pos = this.project(city.lat, city.lng);
+      if (!correctIds.has(city.id)) {
+        svg += `<circle cx="${pos.x}" cy="${pos.y}" r="2.5" fill="#2a3555" stroke="#3a4565" stroke-width="0.4" opacity="0.5" pointer-events="none"/>`;
+      }
+    });
+
+    // 正解都市ピン
+    correctCities.forEach((city, i) => {
+      const pos = this.project(city.lat, city.lng);
+      const r = 3;
+      const color = "#4a9eff";
+      svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${color}" stroke="#fff" stroke-width="0.8" pointer-events="none"/>`;
+    });
+
+    // 大陸ラベル（選択可能な大陸のみ表示）
+    Object.entries(continentLabels).forEach(([key, info]) => {
+      if (availableSet.has(key)) {
+        svg += `<text x="${info.x}" y="${info.y}" text-anchor="middle" fill="#f0c040" font-size="11" font-weight="700" class="continent-label" data-continent="${key}" pointer-events="none">${info.label}</text>`;
+        // 残り都市数
+        const remaining = gameCities.filter(c => c.continent === key && !correctIds.has(c.id)).length;
+        svg += `<text x="${info.x}" y="${info.y + 14}" text-anchor="middle" fill="#8a9ab5" font-size="8" pointer-events="none">${remaining}都市</text>`;
+      }
+    });
+
+    svg += `</svg>`;
+    container.innerHTML = svg;
+
+    // クリックイベントを各大陸グループに設定
+    container.querySelectorAll(".continent-clickable").forEach(g => {
+      g.style.cursor = "pointer";
+      g.addEventListener("click", () => {
+        const continent = g.dataset.continent;
+        onSelect(continent);
+      });
+    });
+  }
 }

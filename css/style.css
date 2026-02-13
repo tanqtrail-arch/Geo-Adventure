@@ -784,7 +784,7 @@ body {
 /* -- Route Selection -- */
 .route-container {
   text-align: center;
-  padding: 40px 0;
+  padding: 20px 0;
 }
 .route-container h2 {
   font-family: var(--font-title);
@@ -794,7 +794,7 @@ body {
 }
 .route-flavor {
   color: var(--text-secondary);
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   font-size: 0.95rem;
 }
 .route-options {
@@ -802,29 +802,42 @@ body {
   flex-direction: column;
   gap: 14px;
 }
-.route-btn {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.route-map-container {
   width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 20px;
+  max-width: 680px;
+  margin: 0 auto;
   border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+.route-map-container .world-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 大陸インタラクティブ */
+.continent-clickable path {
+  transition: fill 0.25s, stroke 0.25s, filter 0.25s;
   cursor: pointer;
-  font-family: var(--font-main);
-  font-size: 1rem;
-  transition: border-color 0.2s, background 0.2s, transform 0.15s;
-  text-align: left;
 }
-.route-btn:hover {
-  border-color: var(--accent-gold);
-  background: rgba(240, 192, 64, 0.06);
-  transform: translateX(6px);
+.continent-clickable:hover path {
+  fill: #1e4a6e;
+  stroke: #f0c040;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 6px rgba(240, 192, 64, 0.4));
 }
-.route-icon { font-size: 1.4rem; }
-.route-desc { color: var(--text-secondary); }
+.continent-clickable:active path {
+  fill: #2a5a80;
+  stroke: #ffd060;
+}
+.continent-disabled path {
+  opacity: 0.25;
+}
+.continent-label {
+  pointer-events: none;
+  text-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
+}
 
 /* -- Passport Screen -- */
 .passport-screen {
